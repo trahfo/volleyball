@@ -15,21 +15,18 @@
             position: relative;
             color: white;
             padding: 150px 0;
-            background-color: var(--secondary-color);
-            overflow: hidden;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                        url('bg.jpg') center/cover no-repeat;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.2;
-            z-index: 1;
-        }
+
         .hero-content {
             position: relative;
             z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         section {
             padding: 80px 0;
@@ -81,6 +78,35 @@
             height: 50px;
             fill: var(--primary-color);
         }
+        /* Gallery styles */
+        .gallery-img {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        .gallery-img:hover {
+            transform: scale(1.05);
+        }
+        .carousel-control {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        .carousel-control:hover {
+            opacity: 1;
+        }
+        .modal-fullscreen .modal-content {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        .modal-image {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+        }
     </style>
 </head>
 <body>
@@ -102,6 +128,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#join">Mitmachen</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Kontakt</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#faq">F.A.Q</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -109,18 +141,9 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <!-- SVG Pattern Background -->
-        <svg class="hero-background" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <pattern id="volleyball-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                <circle cx="10" cy="10" r="4" fill="white"/>
-                <path d="M 6 10 Q 10 6, 14 10 M 10 6 Q 14 10, 10 14 M 6 10 Q 10 14, 14 10" 
-                      stroke="white" fill="none" stroke-width="0.5"/>
-            </pattern>
-            <rect x="0" y="0" width="100" height="100" fill="url(#volleyball-pattern)"/>
-        </svg>
         <div class="container text-center hero-content">
-            <h1 class="display-3 mb-4">UNION Auersthal Volleyball</h1>
-            <p class="lead mb-4">Jeden Donnerstag 20:00 in der Turnhalle in Auersthal - Komm vorbei und spiel mit!</p>
+            <h1 class="display-3 mb-4">Donnerstag Volleyball Verein</h1>
+            <p class="lead mb-4">Jeden Donnerstag in der Turnhalle - Komm vorbei und spiel mit!</p>
             <a href="#join" class="btn btn-join btn-lg">Jetzt Mitmachen</a>
         </div>
     </section>
@@ -166,6 +189,62 @@
         </div>
     </section>
 
+    <!-- Gallery Section -->
+    <section class="bg-white py-5">
+        <div class="container">
+            <div class="row g-4 pb-4">
+                <div class="col-md-4">
+                    <img src="one.webp" alt="Volleyball Spiel" class="img-fluid rounded gallery-img" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="0">
+                </div>
+                <div class="col-md-4">
+                    <img src="two.jpg" alt="Team Training" class="img-fluid rounded gallery-img" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="1">
+                </div>
+                <div class="col-md-4">
+                    <img src="three.jpg" alt="Turnhalle" class="img-fluid rounded gallery-img" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="2">
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <img src="two.jpg" alt="Team Training" class="img-fluid rounded gallery-img" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="1">
+                </div>
+                <div class="col-md-4">
+                    <img src="one.webp" alt="Volleyball Spiel" class="img-fluid rounded gallery-img" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="0">
+                </div>
+                <div class="col-md-4">
+                    <img src="three.jpg" alt="Turnhalle" class="img-fluid rounded gallery-img" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="2">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Modal -->
+    <div class="modal fade" id="galleryModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content bg-dark bg-opacity-50">
+                <div class="modal-body position-relative p-0 d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+                    <!-- Close button -->
+                    <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-4" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                    <!-- Previous button -->
+                    <button class="carousel-control prev-btn border-0 bg-transparent position-absolute start-0 top-50 translate-middle-y px-3" style="z-index: 1030;">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </button>
+
+                    <!-- Image container -->
+                    <div class="text-center" style="max-width: 90vw; max-height: 90vh;">
+                        <img src="" class="img-fluid modal-image" alt="" style="max-height: 90vh; width: auto;">
+                    </div>
+
+                    <!-- Next button -->
+                    <button class="carousel-control next-btn border-0 bg-transparent position-absolute end-0 top-50 translate-middle-y px-3" style="z-index: 1030;">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Schedule Section -->
     <section id="schedule" class="bg-secondary text-white">
         <div class="container">
@@ -181,6 +260,15 @@
                                 20:30 Uhr - Spielende
                             </p>
                         </div>
+                    </div>
+                    <div class="map-container mt-4">
+                        <iframe
+                            width="100%"
+                            height="100%"
+                            frameborder="0"
+                            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBMSjZ88BrfHjVoyFQf7nYFH81EmOsjH-s&q=48.375080938285684,16.63783780759713&zoom=15">
+                        </iframe>
+                        <div class="volleyball-marker"></div>
                     </div>
                 </div>
             </div>
@@ -210,6 +298,131 @@
         </div>
     </section>
 
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 bg-secondary text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="mb-4">Kontakt</h2>
+                    <p class="lead mb-5">Haben Sie Fragen? Kontaktieren Sie uns!</p>
+
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="card bg-white text-dark p-4 mb-4">
+                                <div class="card-body text-center">
+                                    <div class="mb-4">
+                                        <div class="icon-circle mb-3">
+                                            <svg viewBox="0 0 24 24">
+                                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                            </svg>
+                                        </div>
+                                        <h3 class="h4 mb-2">E-Mail</h3>
+                                        <p class="mb-0">
+                                            <a href="mailto:info@volleyball-donnerstag.at" class="text-decoration-none">
+                                                info@volleyball-donnerstag.at
+                                            </a>
+                                        </p>
+                                    </div>
+
+                                    <div class="mb-2">
+                                        <div class="icon-circle mb-3">
+                                            <svg viewBox="0 0 24 24">
+                                                <path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1 1 0 0 0-1.02.24l-2.2 2.2a15.097 15.097 0 0 1-6.83-6.83l2.2-2.2c.28-.28.36-.67.25-1.02A11.36 11.36 0 0 1 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM12 3v10l3-3h6V3h-9z"/>
+                                            </svg>
+                                        </div>
+                                        <h3 class="h4 mb-2">Telefon</h3>
+                                        <p class="mb-0">
+                                            <a href="tel:+43123456789" class="text-decoration-none">
+                                                +43 123 456 789
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-center small">
+                                Erreichbar Montag bis Freitag<br>
+                                09:00 - 17:00 Uhr
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Häufig gestellte Fragen</h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            Kann ich auch als Anfänger mitmachen?
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Absolut! Bei uns sind alle Spielstärken willkommen - von Anfängern bis zu erfahrenen Spielern. Wir achten darauf, dass die Teams ausgewogen sind und jeder zum Spielen kommt. Unsere erfahreneren Spieler helfen gerne mit Tipps und Tricks.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            Worauf kommt es bei euch besonders an?
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Der Spaß steht bei uns an erster Stelle! Natürlich spielen wir mit Ehrgeiz, aber wichtiger ist uns die Freude am gemeinsamen Sport und die gute Atmosphäre in der Gruppe.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            Spielt ihr auch im Sommer?
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Im Sommer macht die Halle Pause, aber wir treffen uns gelegentlich zum Beachvolleyball im Freien. Die Termine dafür werden spontan in unserer WhatsApp-Gruppe bekannt gegeben.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                            Gibt es eine Altersgrenze?
+                        </button>
+                    </h2>
+                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Nein, wir haben keine Altersbegrenzung nach oben oder unten. Wichtig ist nur, dass man Spaß am Volleyball hat und den Ball übers Netz spielen kann.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                            Muss ich regelmäßig kommen?
+                        </button>
+                    </h2>
+                    <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Nein, du kannst kommen wann du willst. Es gibt keine Verpflichtung zur regelmäßigen Teilnahme. Wir freuen uns über jeden, der dabei ist!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="py-4 bg-dark text-white">
         <div class="container text-center">
@@ -218,5 +431,58 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Gallery functionality
+        const galleryModal = document.getElementById('galleryModal');
+        const modalImage = galleryModal.querySelector('.modal-image');
+        const prevBtn = galleryModal.querySelector('.prev-btn');
+        const nextBtn = galleryModal.querySelector('.next-btn');
+        const galleryImages = document.querySelectorAll('.gallery-img');
+        let currentIndex = 0;
+
+        // Array of image sources
+        const imageSources = Array.from(galleryImages).map(img => ({
+            src: img.src,
+            alt: img.alt
+        }));
+
+        // Update modal image
+        function updateModalImage() {
+            modalImage.src = imageSources[currentIndex].src;
+            modalImage.alt = imageSources[currentIndex].alt;
+        }
+
+        // Event listener for opening modal
+        galleryModal.addEventListener('show.bs.modal', event => {
+            const trigger = event.relatedTarget;
+            currentIndex = parseInt(trigger.dataset.index);
+            updateModalImage();
+        });
+
+        // Previous button click
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + imageSources.length) % imageSources.length;
+            updateModalImage();
+        });
+
+        // Next button click
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % imageSources.length;
+            updateModalImage();
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!galleryModal.classList.contains('show')) return;
+
+            if (e.key === 'ArrowLeft') {
+                prevBtn.click();
+            } else if (e.key === 'ArrowRight') {
+                nextBtn.click();
+            } else if (e.key === 'Escape') {
+                galleryModal.querySelector('.btn-close').click();
+            }
+        });
+    </script>
 </body>
 </html>
